@@ -8,9 +8,6 @@ const pages_div = document.getElementById("pages-div");
 const loadData = async (page = 0, q = "") => {
   let URL =
     "https://pink-famous-eel.cyclic.app/data/BDrw56tuSiCp7lmg5K5NA69RBEAKgA08/";
-  cards.innerHTML = "";
-  categories.innerHTML = "";
-  pages.innerHTML = "";
   let data, res;
   if (q !== "") {
     URL = `${URL}?q=${q}`;
@@ -47,6 +44,7 @@ const handleQuery = (e) => {
 };
 
 const displayCards = (data) => {
+  cards.innerHTML = "";
   for (let item of data) {
     let card = document.createElement("div");
     card.classList.add("card", "info-card", "customers-card");
@@ -77,6 +75,7 @@ const displayCards = (data) => {
 };
 
 const displayPagination = (data) => {
+  pages.innerHTML = "";
   let li = document.createElement("li");
   li.classList.add("page-item");
   li.innerHTML = `<a class="page-link" href="#" aria-label="Previous">
@@ -98,6 +97,7 @@ const displayPagination = (data) => {
 };
 
 const displayCategories = (data) => {
+  categories.innerHTML = "";
   for (let item of data) {
     if (item.tag) {
       if (item.tag.includes(",")) {
@@ -105,16 +105,17 @@ const displayCategories = (data) => {
         for (let tag of tags) {
           let button = document.createElement("a");
           button.innerHTML = tag;
+          button.href = "#";
           button.classList.add("btn", "btn-outline-secondary", "m-1");
-          //add an onclick event that executes loadDataParams with the tag as the parameter
-          tag = tag.trim();
-          button.onclick = () => loadDataParam(tag);
+          button.onclick = () => loadDataParam(tag.trim());
           categories.appendChild(button);
         }
       } else {
         let button = document.createElement("a");
         button.classList.add("btn", "btn-outline-secondary", "m-1");
         button.innerHTML = item.tag;
+        button.href = "#";
+        button.onclick = () => loadDataParam(item.tag.trim());
         categories.appendChild(button);
       }
     }
@@ -122,14 +123,10 @@ const displayCategories = (data) => {
 };
 
 const loadDataParam = async (param) => {
-  console.log(param);
   let url = `https://pink-famous-eel.cyclic.app/data/ph46q0ARS3etpxpKnHRGIBPLEO0Ffqbj/${param}`;
   let res = await fetch(url);
   let data = await res.json();
-  cards.innerHTML = "";
-  categories.innerHTML = "";
-  pages.innerHTML = "";
-  displayCards(data);
+  displayCards(data.data);
 };
 
 const changeIcon = (e) => {
