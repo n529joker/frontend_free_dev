@@ -106,6 +106,9 @@ const displayCategories = (data) => {
           let button = document.createElement("a");
           button.innerHTML = tag;
           button.classList.add("btn", "btn-outline-secondary", "m-1");
+          //add an onclick event that executes loadDataParams with the tag as the parameter
+          tag = tag.trim();
+          button.onclick = () => loadDataParam(tag);
           categories.appendChild(button);
         }
       } else {
@@ -116,6 +119,17 @@ const displayCategories = (data) => {
       }
     }
   }
+};
+
+const loadDataParam = async (param) => {
+  console.log(param);
+  let url = `https://pink-famous-eel.cyclic.app/data/ph46q0ARS3etpxpKnHRGIBPLEO0Ffqbj/${param}`;
+  let res = await fetch(url);
+  let data = await res.json();
+  cards.innerHTML = "";
+  categories.innerHTML = "";
+  pages.innerHTML = "";
+  displayCards(data);
 };
 
 const changeIcon = (e) => {
