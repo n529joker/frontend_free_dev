@@ -5,7 +5,7 @@ const categories_div = document.getElementById("categories-div");
 const pages = document.getElementById("pages");
 const pages_div = document.getElementById("pages-div");
 
-const loadData = async (q = "", page = 0, num = 50) => {
+const loadData = async (page = 0, q = "") => {
   let URL =
     "https://pink-famous-eel.cyclic.app/data/BDrw56tuSiCp7lmg5K5NA69RBEAKgA08/";
   cards.innerHTML = "";
