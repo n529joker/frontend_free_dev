@@ -9,7 +9,7 @@ const loadDataParam = async (param) => {
   let URL = `https://pink-famous-eel.cyclic.app/data/BDrw56tuSiCp7lmg5K5NA69RBEAKgA08/${param}`;
   let res = await fetch(URL);
   let data = await res.json();
-  type.innerHTML = `for ${param}`;
+  type.innerHTML = `resources for ${param}`;
   getTags(data.data, "tag");
   displayCards(data.data);
   pages_div.innerHTML = "";
@@ -41,6 +41,7 @@ const loadDataQuery = async (Q) => {
   let URL = `https://pink-famous-eel.cyclic.app/data/BDrw56tuSiCp7lmg5K5NA69RBEAKgA08/?q=${Q}`;
   let res = await fetch(URL);
   let data = await res.json();
+  type.innerHTML = `resources for ${Q}` 
   categories_div.innerHTML = "";
   pages_div.innerHTML = "";
   if (data.Error) {
